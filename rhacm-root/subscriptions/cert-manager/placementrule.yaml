@@ -1,0 +1,14 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  clusterSelector:
+    matchExpressions:
+    - key: purpose
+      operator: In
+      values:
+      - development
+      - production
