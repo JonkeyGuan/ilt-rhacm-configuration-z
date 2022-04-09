@@ -1,0 +1,14 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: vault-token
+  namespace: acm-secrets
+placementRef:
+  name: vault-token
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: vault-token
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io

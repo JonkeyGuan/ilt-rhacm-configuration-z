@@ -1,0 +1,31 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: vault-token
+  namespace: acm-secrets
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: ConfigurationPolicy
+      metadata:
+        name: vault-token
+      spec:
+        remediationAction: enforce
+        severity: med
+        object-templates:
+        - complianceType: musthave
+          objectDefinition:
+            apiVersion: v1
+            kind: Secret
+            metadata:
+              name: vault-token
+              namespace: vault-client
+            stringData:
+              VAULT_TOKEN: |
+                {{hub fromConfigMap "acm-secrets" "vault-data" "VAULT_TOKEN" hub}}
+              VAULT_ADDR: |
+                {{hub fromConfigMap "acm-secrets" "vault-data" "VAULT_ADDR" hub}}
