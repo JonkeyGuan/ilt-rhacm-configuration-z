@@ -1,0 +1,18 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: agents-ch69t-dev
+  namespace: acm-subscriptions
+  annotations:
+    apps.open-cluster-management.io/git-branch: master
+    apps.open-cluster-management.io/git-path: cluster-specific/agents/overlays/ch69t-dev
+    apps.open-cluster-management.io/reconcile-option: merge
+  labels:
+    app: agents-ch69t-dev
+spec:
+  channel: acm-configuration/acm-applications
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: agents-ch69t-dev
