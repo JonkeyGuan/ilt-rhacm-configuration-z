@@ -1,0 +1,18 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: cert-manager-config-ch69t-prod
+  namespace: acm-subscriptions
+  annotations:
+    apps.open-cluster-management.io/git-branch: master
+    apps.open-cluster-management.io/git-path: cluster-specific/cert-manager-config/overlays/ch69t-prod
+    apps.open-cluster-management.io/reconcile-option: merge
+  labels:
+    app: cert-manager-config-ch69t-prod
+spec:
+  channel: acm-configuration/acm-applications
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: cert-manager-config-ch69t-prod
