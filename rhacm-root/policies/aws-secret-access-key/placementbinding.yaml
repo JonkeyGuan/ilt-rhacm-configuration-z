@@ -1,0 +1,14 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: aws-secret-access-key
+  namespace: acm-secrets
+placementRef:
+  name: aws-secret-access-key
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: aws-secret-access-key
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
