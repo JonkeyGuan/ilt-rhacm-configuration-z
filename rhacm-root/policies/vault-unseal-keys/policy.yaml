@@ -1,0 +1,33 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: vault-unseal-keys
+  namespace: acm-secrets
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+  - objectDefinition:
+      apiVersion: policy.open-cluster-management.io/v1
+      kind: ConfigurationPolicy
+      metadata:
+        name: vault-unseal-keys
+      spec:
+        remediationAction: enforce
+        severity: med
+        object-templates:
+        - complianceType: musthave
+          objectDefinition:
+            apiVersion: v1
+            kind: Secret
+            metadata:
+              name: vault-unseal-keys
+              namespace: vault
+            stringData:
+              VAULT_UNSEALKEY_1: |
+                {{hub fromConfigMap "acm-secrets" "vault-data" "VAULT_UNSEALKEY_1" hub}}
+              VAULT_UNSEALKEY_2: |
+                {{hub fromConfigMap "acm-secrets" "vault-data" "VAULT_UNSEALKEY_2" hub}}
+              VAULT_UNSEALKEY_3: |
+                {{hub fromConfigMap "acm-secrets" "vault-data" "VAULT_UNSEALKEY_3" hub}}
