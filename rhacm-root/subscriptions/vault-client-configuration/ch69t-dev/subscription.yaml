@@ -1,0 +1,18 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: vault-client-configuration-ch69t-dev
+  namespace: vault-client
+  annotations:
+    apps.open-cluster-management.io/git-branch: master
+    apps.open-cluster-management.io/git-path: cluster-specific/vault-client-configuration/overlays/ch69t-dev
+    apps.open-cluster-management.io/reconcile-option: merge
+  labels:
+    app: vault-client-configuration-ch69t-dev
+spec:
+  channel: acm-configuration/acm-applications
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: vault-client-configuration-ch69t-dev

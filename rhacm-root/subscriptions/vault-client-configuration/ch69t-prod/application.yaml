@@ -1,0 +1,14 @@
+---
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: vault-client-configuration-ch69t-prod
+  namespace: vault-client
+spec:
+  componentKinds:
+  - group: apps.open-cluster-management.io
+    kind: Subscription
+  descriptor: {}
+  selector:
+    matchLabels:
+      app: vault-client-configuration-ch69t-prod
