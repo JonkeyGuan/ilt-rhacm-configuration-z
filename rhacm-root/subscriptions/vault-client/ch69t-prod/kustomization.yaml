@@ -1,0 +1,53 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+- ../../../../subscriptions-base/vault-client
+
+patches:
+- target:
+    group: apps.open-cluster-management.io
+    version: v1
+    kind: Subscription
+    namespace: vault-client
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: vault-client-ch69t-prod
+    - op: replace
+      path: /metadata/labels/app
+      value: vault-client-ch69t-prod
+    - op: replace
+      path: /spec/packageOverrides/0/packageOverrides/0/value/injector/authPath
+      value: auth/ch69t-prod
+    - op: replace
+      path: /spec/packageOverrides/0/packageOverrides/0/value/injector/externalVaultAddr
+      value: https://vault-vault.apps.cluster-ch69t.sandbox1624.opentlc.com
+    - op: replace
+      path: /spec/placement/placementRef/name
+      value: vault-client-ch69t-prod
+- target:
+    group: app.k8s.io
+    version: v1beta1
+    kind: Application
+    namespace: vault-client
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: vault-client-ch69t-prod
+    - op: replace
+      path: /spec/selector/matchLabels/app
+      value: vault-client-ch69t-prod
+- target:
+    group: apps.open-cluster-management.io
+    version: v1
+    kind: PlacementRule
+    namespace: vault-client
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: vault-client-ch69t-prod
+    - op: replace
+      path: /spec/clusterSelector/matchLabels/name
+      value: ch69t-prod

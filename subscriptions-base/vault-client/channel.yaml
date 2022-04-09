@@ -1,0 +1,11 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: hashicorp-vault-helm
+  namespace: vault-client
+  annotations:
+    apps.open-cluster-management.io/reconcile-rate: medium
+spec:
+  type: HelmRepo
+  pathname: 'https://helm.releases.hashicorp.com'
